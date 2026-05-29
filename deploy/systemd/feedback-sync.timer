@@ -1,0 +1,13 @@
+[Unit]
+Description=Run the feedback sync once daily
+
+[Timer]
+# Daily at 02:30 local time, with a randomized delay to avoid thundering herd.
+OnCalendar=*-*-* 02:30:00
+RandomizedDelaySec=300
+# If the machine was off at the scheduled time, run on next boot.
+Persistent=true
+Unit=feedback-sync.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,49 @@
+# Optional: run the daily sync from GitHub Actions instead of a server.
+#
+# Copy this file to .github/workflows/feedback-sync.yml and add these repo
+# secrets (Settings -> Secrets and variables -> Actions):
+#   GOOGLE_SERVICE_ACCOUNT_JSON  - the full service-account key JSON
+#   ANTHROPIC_API_KEY            - your Anthropic API key
+#
+# The schedule uses UTC. 02:30 IST == 21:00 UTC (previous day).
+
+name: Feedback Sync (daily)
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 02:30 IST
+  workflow_dispatch: {}     # allow manual runs from the Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run sync
+        env:
+          SOURCE_SPREADSHEET_ID: 1-LYduNvxpbQh2uOrq3joOUC1x1q4sH4RPEfaw3gC-JE
+          SOURCE_WORKSHEET_TITLE: "SA response evening"
+          DEST_SPREADSHEET_ID: 1fMmv1rn5dJl0yQO_eusaq-es2P2fdSGyTX2YfCtuw_s
+          DEST_WORKSHEET_TITLE: "AI for Women"
+          PROGRAM_COLUMN: "Which course are you giving feedback for?"
+          PROGRAM_FILTER: "Training Program on Using AI for Business Growth"
+          FEEDBACK_COLUMN: "We value your feedback. Please let us know more."
+          ROW_ID_COLUMN: "Email address"
+          REWRITE_ENGINE: anthropic
+          REWRITE_MODEL: claude-sonnet-4-6
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          # Persisting dedupe state across runs in CI is optional; the in-sheet
+          # duplicate check already prevents duplicates on its own.
+          STATE_FILE: ./state/synced_keys.json
+          LOG_LEVEL: INFO
+        run: python main.py

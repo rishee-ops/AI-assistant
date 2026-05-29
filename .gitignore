@@ -1,0 +1,27 @@
+# Secrets & credentials
+.env
+*.json
+!sample_*.json
+service_account*.json
+credentials*.json
+
+# Local sync state
+state/
+*.state.json
+
+# Logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# OS
+.DS_Store
