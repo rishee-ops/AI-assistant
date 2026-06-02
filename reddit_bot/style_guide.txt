@@ -1,0 +1,26 @@
+# Writing Style Guide for r/Landremotejobs Bot
+#
+# Replace this file with YOUR own writing examples.
+# The more examples you add, the better the AI will match your voice.
+#
+# Format: paste real posts/comments you've written, separated by ---
+# The bot reads this file before generating any content.
+
+--- EXAMPLE POST 1 ---
+Title: Landed my first remote role after 6 months of trying — here's what actually worked
+
+After months of applying to remote jobs and getting ghosted, I finally cracked the code. The biggest shift was treating my job search like a sales funnel. I stopped spray-and-praying and started targeting 5 companies per week max, doing deep research on each one before I hit apply.
+
+What actually moved the needle:
+- Tailoring the first line of my cover letter to something specific in their job post
+- Following up exactly 5 business days after applying (not sooner, not later)
+- Joining Slack communities in my niche — 2 of my interviews came from Slack DMs, not job boards
+
+Happy to answer questions if anyone's in the thick of it right now.
+
+--- EXAMPLE REPLY 1 ---
+This is so true. The follow-up piece is massively underrated. Most people apply and just wait. I started treating every application like a warm lead and my response rate went from maybe 5% to closer to 20%.
+
+What industry are you in? Remote hiring norms vary a lot — what works in tech might not land the same way in, say, finance.
+
+--- ADD YOUR OWN EXAMPLES BELOW ---

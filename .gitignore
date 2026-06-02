@@ -1,0 +1,6 @@
+.env
+*.pyc
+__pycache__/
+.playwright/
+post_log.json
+*.log
