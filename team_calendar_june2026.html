@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📅 June 2026 — AI HR &amp; Marketing Team | Class Schedule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      min-height: 100vh;
+    }
+
+    .page-wrapper {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7C3AED 0%, #0891B2 40%, #DB2777 80%, #D97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: #64748B;
+      font-weight: 400;
+    }
+
+    /* ─── LEGEND ─────────────────────────────────────────────── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      background: white;
+      border: 1.5px solid currentColor;
+      cursor: default;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .legend-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── TABLE CONTAINER ────────────────────────────────────── */
+    .table-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+      overflow: auto;
+      border: 1px solid #E2E8F0;
+    }
+
+    /* ─── TABLE ──────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+    }
+
+    thead tr {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    thead th {
+      padding: 14px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      border-bottom: 2px solid #E2E8F0;
+    }
+
+    thead th:first-child,
+    thead th:nth-child(2) {
+      background: #1E293B;
+      color: #F1F5F9;
+      text-align: left;
+    }
+
+    .th-rishee   { background: #7C3AED; color: white; }
+    .th-tanisha  { background: #0891B2; color: white; }
+    .th-chhavi   { background: #EA580C; color: white; }
+    .th-omkar    { background: #2563EB; color: white; }
+    .th-payal    { background: #DB2777; color: white; }
+    .th-prachi   { background: #16A34A; color: white; }
+    .th-khusboo  { background: #D97706; color: white; }
+
+    /* ─── ROWS ───────────────────────────────────────────────── */
+    tbody tr {
+      transition: background 0.15s;
+    }
+
+    tbody tr:nth-child(even):not(.week-sep):not(.today-row) {
+      background: #F8FAFC;
+    }
+
+    tbody tr:not(.week-sep):not(.today-row):hover {
+      background: #EFF6FF !important;
+    }
+
+    /* Week separator */
+    .week-sep td {
+      background: #E2E8F0 !important;
+      font-weight: 700;
+      font-size: 12px;
+      color: #475569;
+      padding: 8px 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* TODAY row */
+    .today-row {
+      background: #FFFBEB !important;
+    }
+
+    .today-row td:first-child {
+      border-left: 4px solid #F59E0B !important;
+    }
+
+    /* ─── CELLS ──────────────────────────────────────────────── */
+    td {
+      padding: 10px 10px;
+      vertical-align: top;
+      border-bottom: 1px solid #F1F5F9;
+      border-right: 1px solid #F1F5F9;
+      font-size: 13px;
+    }
+
+    td:last-child { border-right: none; }
+
+    .date-cell {
+      min-width: 80px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #1E293B;
+      white-space: nowrap;
+      vertical-align: middle;
+      padding-left: 14px;
+    }
+
+    .date-cell.sunday { background: #F5F3FF !important; }
+
+    .day-cell {
+      min-width: 65px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+      white-space: nowrap;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .date-num {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1;
+      display: block;
+    }
+
+    .date-month {
+      font-size: 11px;
+      font-weight: 500;
+      color: #94A3B8;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .today-badge {
+      display: inline-block;
+      background: #F59E0B;
+      color: white;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ─── SESSION CARDS ──────────────────────────────────────── */
+    .session-card {
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 4px 0;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .session-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .session-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .session-course {
+      font-size: 11px;
+      font-weight: 500;
+      color: #1E293B;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    .rishee-note {
+      font-style: italic;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #7C3AED;
+    }
+
+    /* ─── BADGES ─────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-Concept      { background: #EFF6FF; color: #2563EB; border-color: #BFDBFE; }
+    .badge-Mentoring    { background: #ECFDF5; color: #059669; border-color: #A7F3D0; }
+    .badge-Outreach     { background: #FFF7ED; color: #EA580C; border-color: #FED7AA; }
+    .badge-PreRecorded  { background: #F5F3FF; color: #7C3AED; border-color: #DDD6FE; }
+    .badge-Scheduled    { background: #ECFEFF; color: #0891B2; border-color: #A5F3FC; }
+    .badge-Session      { background: #FDF4FF; color: #A21CAF; border-color: #E9D5FF; }
+
+    /* free cell */
+    .free-cell {
+      color: #94A3B8;
+      font-style: italic;
+      font-size: 14px;
+      text-align: center;
+      padding-top: 4px;
+      display: block;
+    }
+
+    /* ─── TOOLTIP ────────────────────────────────────────────── */
+    .tooltip-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(15,23,42,0.35);
+      backdrop-filter: blur(2px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tooltip-overlay.active { display: flex; }
+
+    .tooltip-box {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      max-width: 380px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      position: relative;
+      animation: popIn 0.2s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.88); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .tooltip-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #94A3B8;
+      line-height: 1;
+    }
+
+    .tooltip-close:hover { color: #1E293B; }
+
+    .tooltip-person {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .tooltip-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1E293B;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .tooltip-meta {
+      font-size: 13px;
+      color: #64748B;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tooltip-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .page-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.8;
+    }
+
+    .page-footer strong { color: #475569; }
+
+    /* ─── HIGHLIGHT ANIMATION ─────────────────────────────────── */
+    @keyframes highlightPulse {
+      0%   { box-shadow: inset 0 0 0 3px #F59E0B; }
+      50%  { box-shadow: inset 0 0 0 3px #FCD34D; }
+      100% { box-shadow: inset 0 0 0 3px #F59E0B; }
+    }
+
+    .today-row.pulse {
+      animation: highlightPulse 1.6s ease-in-out 2;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 20px; }
+      .legend-item    { font-size: 11px; padding: 5px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header class="page-header">
+    <h1>📅 June 2026 — AI HR &amp; Marketing Team | Class Schedule</h1>
+    <p class="page-subtitle">Weekly teaching roster &nbsp;·&nbsp; Mon &amp; Sat = Week Off &nbsp;·&nbsp; All times IST</p>
+  </header>
+
+  <!-- ─── LEGEND ─── -->
+  <div class="legend" role="list" aria-label="Team members">
+    <div class="legend-item" style="color:#7C3AED" role="listitem">
+      <span class="legend-dot" style="background:#7C3AED"></span>Rishee Rhudra
+    </div>
+    <div class="legend-item" style="color:#0891B2" role="listitem">
+      <span class="legend-dot" style="background:#0891B2"></span>Tanisha Malla
+    </div>
+    <div class="legend-item" style="color:#EA580C" role="listitem">
+      <span class="legend-dot" style="background:#EA580C"></span>Chhavi Jindal
+    </div>
+    <div class="legend-item" style="color:#2563EB" role="listitem">
+      <span class="legend-dot" style="background:#2563EB"></span>Omkar Amble
+    </div>
+    <div class="legend-item" style="color:#DB2777" role="listitem">
+      <span class="legend-dot" style="background:#DB2777"></span>Payal Sakaria
+    </div>
+    <div class="legend-item" style="color:#16A34A" role="listitem">
+      <span class="legend-dot" style="background:#16A34A"></span>Prachi Pandey
+    </div>
+    <div class="legend-item" style="color:#D97706" role="listitem">
+      <span class="legend-dot" style="background:#D97706"></span>Khusboo Rizwan
+    </div>
+  </div>
+
+  <!-- ─── TABLE ─── -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Day</th>
+          <th class="th-rishee">Rishee Rhudra</th>
+          <th class="th-tanisha">Tanisha Malla</th>
+          <th class="th-chhavi">Chhavi Jindal</th>
+          <th class="th-omkar">Omkar Amble</th>
+          <th class="th-payal">Payal Sakaria</th>
+          <th class="th-prachi">Prachi Pandey</th>
+          <th class="th-khusboo">Khusboo Rizwan</th>
+        </tr>
+      </thead>
+      <tbody id="calendarBody">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="page-footer">
+    <p><strong>Based on CSAT-ls &amp; CSAT-Sa schedule data.</strong> Mon &amp; Sat = Week Off.</p>
+    <p>Generated on <span id="genTimestamp"></span></p>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- ─── TOOLTIP OVERLAY ─── -->
+<div class="tooltip-overlay" id="tooltipOverlay" role="dialog" aria-modal="true" aria-label="Session detail">
+  <div class="tooltip-box">
+    <button class="tooltip-close" id="tooltipClose" aria-label="Close">&#x2715;</button>
+    <div class="tooltip-person" id="ttPerson"></div>
+    <div class="tooltip-title"  id="ttCourse"></div>
+    <div class="tooltip-meta"   id="ttMeta"></div>
+  </div>
+</div>
+
+<script>
+  /* ─── DATA ─────────────────────────────────────────────────── */
+
+  const PEOPLE = [
+    { key: 'rishee',  name: 'Rishee Rhudra',  color: '#7C3AED' },
+    { key: 'tanisha', name: 'Tanisha Malla',   color: '#0891B2' },
+    { key: 'chhavi',  name: 'Chhavi Jindal',   color: '#EA580C' },
+    { key: 'omkar',   name: 'Omkar Amble',     color: '#2563EB' },
+    { key: 'payal',   name: 'Payal Sakaria',   color: '#DB2777' },
+    { key: 'prachi',  name: 'Prachi Pandey',   color: '#16A34A' },
+    { key: 'khusboo', name: 'Khusboo Rizwan',  color: '#D97706' },
+  ];
+
+  function getSchedule(dayType, personKey) {
+    const S = {
+      sunday: {
+        rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
+        tanisha: null,
+        chhavi:  [{ time: '11:00', type: 'Mentoring',   course: 'Exec. Cert. Course in Support & Operations' }],
+        omkar:   [{ time: '13:15', type: 'Concept',     course: 'Remote Freelancing & Profile Building' }],
+        payal:   [{ time: '16:00', type: 'Mentoring',   course: 'AI for Business Growth / IIT Roorkee AI Cert.' }],
+        prachi:  [
+          { time: '18:00', type: 'Outreach',    course: 'US Corp Law courses' },
+          { time: '20:00', type: 'PreRecorded', course: 'US Corp Law courses' }
+        ],
+        khusboo: null,
+      },
+      tuesday: {
+        rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
+        tanisha: [{ time: '20:00', type: 'Concept',           course: 'Personal Branding for Corporate Leaders' }],
+        chhavi:  [{ time: '20:00', type: 'PreRecorded+Concept', course: 'Intl Job Hunt Accelerator Program' }],
+        omkar:   null,
+        payal:   [{ time: '20:00', type: 'Concept',           course: 'Generative AI for Career Growth (Senior Professionals)' }],
+        prachi:  [{ time: '19:00', type: 'Outreach',          course: 'International Business Law' }],
+        khusboo: null,
+      },
+      wednesday: {
+        rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
+        tanisha: null,
+        chhavi:  [{ time: '20:00', type: 'Scheduled',  course: 'Content Marketing & Strategy' }],
+        omkar:   null,
+        payal:   [{ time: '20:00', type: 'Scheduled',  course: 'AI for Business Growth / IIT Roorkee AI Cert.' }],
+        prachi:  [{ time: '20:00', type: 'PreRecorded', course: 'US Corporate Compliance' }],
+        khusboo: null,
+      },
+      thursday: {
+        rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
+        tanisha: null,
+        chhavi:  null,
+        omkar:   [{ time: '20:00', type: 'Concept',   course: 'AI-Driven Marketing & Sales Automation' }],
+        payal:   [{ time: '20:00', type: 'Mentoring', course: 'Startup Generalist & VA Training' }],
+        prachi:  [{ time: '20:00', type: 'Outreach',  course: 'US Tax Compliance & Paralegal Work' }],
+        khusboo: [{ time: '20:00', type: 'Concept',   course: 'Startup Generalist & VA Training' }],
+      },
+      friday: {
+        rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
+        tanisha: null,
+        chhavi:  null,
+        omkar:   null,
+        payal:   null,
+        prachi:  null,
+        khusboo: [{ type: 'Session', course: 'Service Business Entrepreneurship' }],
+      },
+    };
+    return S[dayType][personKey];
+  }
+
+  /* ─── CALENDAR DATES ────────────────────────────────────────── */
+  const WEEKS = [
+    { label: 'Week 1', dates: [
+      { date: 2,  day: 'Tue', type: 'tuesday'   },
+      { date: 3,  day: 'Wed', type: 'wednesday' },
+      { date: 4,  day: 'Thu', type: 'thursday'  },
+      { date: 5,  day: 'Fri', type: 'friday'    },
+      { date: 7,  day: 'Sun', type: 'sunday'    },
+    ]},
+    { label: 'Week 2', dates: [
+      { date: 9,  day: 'Tue', type: 'tuesday'   },
+      { date: 10, day: 'Wed', type: 'wednesday' },
+      { date: 11, day: 'Thu', type: 'thursday'  },
+      { date: 12, day: 'Fri', type: 'friday'    },
+      { date: 14, day: 'Sun', type: 'sunday'    },
+    ]},
+    { label: 'Week 3', dates: [
+      { date: 16, day: 'Tue', type: 'tuesday'   },
+      { date: 17, day: 'Wed', type: 'wednesday' },
+      { date: 18, day: 'Thu', type: 'thursday'  },
+      { date: 19, day: 'Fri', type: 'friday'    },
+      { date: 21, day: 'Sun', type: 'sunday', today: true },
+    ]},
+    { label: 'Week 4', dates: [
+      { date: 23, day: 'Tue', type: 'tuesday'   },
+      { date: 24, day: 'Wed', type: 'wednesday' },
+      { date: 25, day: 'Thu', type: 'thursday'  },
+      { date: 26, day: 'Fri', type: 'friday'    },
+      { date: 28, day: 'Sun', type: 'sunday'    },
+    ]},
+    { label: 'Week 5', dates: [
+      { date: 30, day: 'Tue', type: 'tuesday'   },
+    ]},
+  ];
+
+  /* ─── RENDER ────────────────────────────────────────────────── */
+
+  function badgeClass(type) {
+    const map = {
+      'Concept':             'badge-Concept',
+      'Mentoring':           'badge-Mentoring',
+      'Outreach':            'badge-Outreach',
+      'PreRecorded':         'badge-PreRecorded',
+      'PreRecorded+Concept': 'badge-PreRecorded',
+      'Scheduled':           'badge-Scheduled',
+      'Session':             'badge-Session',
+    };
+    return map[type] || 'badge-Concept';
+  }
+
+  function badgeLabel(type) {
+    const map = {
+      'PreRecorded':         'Pre-Recorded',
+      'PreRecorded+Concept': 'Pre-Rec + Concept',
+    };
+    return map[type] || type;
+  }
+
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function buildSessionCard(session, personKey) {
+    const person = PEOPLE.find(p => p.key === personKey);
+    const color  = person ? person.color : '#64748B';
+
+    if (session.note) {
+      return `
+        <div class="session-card rishee-note"
+             style="border-left:3px solid ${color}; background:${color}18;"
+             data-person="${esc(person.name)}"
+             data-course="${esc(session.text)}"
+             data-type="Info"
+             data-time="">
+          ${session.text}
+        </div>`;
+    }
+
+    const timePart = session.time
+      ? `<div class="session-time">&#x23F0; ${session.time}</div>` : '';
+
+    return `
+      <div class="session-card"
+           style="border-left:3px solid ${color}; background:${color}18;"
+           data-person="${esc(person.name)}"
+           data-course="${esc(session.course)}"
+           data-type="${esc(session.type)}"
+           data-time="${esc(session.time || '')}">
+        ${timePart}
+        <span class="badge ${badgeClass(session.type)}">${badgeLabel(session.type)}</span>
+        <div class="session-course">${session.course}</div>
+      </div>`;
+  }
+
+  function buildCell(sessions, personKey) {
+    if (!sessions || sessions.length === 0) {
+      return `<td><span class="free-cell">&mdash;</span></td>`;
+    }
+    const cards = sessions.map(s => buildSessionCard(s, personKey)).join('');
+    return `<td>${cards}</td>`;
+  }
+
+  function renderCalendar() {
+    const tbody = document.getElementById('calendarBody');
+    let html = '';
+
+    WEEKS.forEach(week => {
+      html += `
+        <tr class="week-sep">
+          <td colspan="9">&#x1F4C5; ${week.label}</td>
+        </tr>`;
+
+      week.dates.forEach(d => {
+        const isSunday = d.type === 'sunday';
+        const isToday  = !!d.today;
+        const rowClass = isToday ? ' class="today-row"' : '';
+        const dateCellClass = 'date-cell' + (isSunday ? ' sunday' : '');
+        const todayBadge = isToday ? `<span class="today-badge">TODAY</span>` : '';
+
+        html += `<tr${rowClass}${isToday ? ' id="todayRow"' : ''}>`;
+        html += `
+          <td class="${dateCellClass}">
+            <span class="date-num">${d.date}</span>
+            <span class="date-month">Jun 2026</span>
+            ${todayBadge}
+          </td>
+          <td class="day-cell">${d.day}</td>`;
+
+        PEOPLE.forEach(p => {
+          const sessions = getSchedule(d.type, p.key);
+          html += buildCell(sessions, p.key);
+        });
+
+        html += `</tr>`;
+      });
+    });
+
+    tbody.innerHTML = html;
+  }
+
+  /* ─── TOOLTIP ───────────────────────────────────────────────── */
+
+  function initTooltip() {
+    const overlay  = document.getElementById('tooltipOverlay');
+    const closeBtn = document.getElementById('tooltipClose');
+    const ttPerson = document.getElementById('ttPerson');
+    const ttCourse = document.getElementById('ttCourse');
+    const ttMeta   = document.getElementById('ttMeta');
+
+    document.getElementById('calendarBody').addEventListener('click', e => {
+      const card = e.target.closest('.session-card');
+      if (!card) return;
+
+      const person = card.dataset.person || '';
+      const course = card.dataset.course || '';
+      const type   = card.dataset.type   || '';
+      const time   = card.dataset.time   || '';
+
+      const personObj = PEOPLE.find(p => p.name === person);
+      const color = personObj ? personObj.color : '#64748B';
+
+      ttPerson.textContent = person;
+      ttPerson.style.color = color;
+      ttCourse.textContent = course;
+
+      let metaHTML = '';
+      if (type && type !== 'Info') {
+        metaHTML += `<span>&#x1F3F7;&#xFE0F; <strong>${badgeLabel(type)}</strong></span>`;
+      }
+      if (time) {
+        metaHTML += `<span>&#x23F0; <strong>${time} IST</strong></span>`;
+      }
+      metaHTML += `<span>&#x1F464; ${person}</span>`;
+      ttMeta.innerHTML = metaHTML;
+
+      overlay.classList.add('active');
+    });
+
+    function closeTooltip() { overlay.classList.remove('active'); }
+    closeBtn.addEventListener('click', closeTooltip);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeTooltip();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeTooltip();
+    });
+  }
+
+  /* ─── TODAY HIGHLIGHT ───────────────────────────────────────── */
+
+  function scrollToToday() {
+    const todayRow = document.getElementById('todayRow');
+    if (!todayRow) return;
+    setTimeout(() => {
+      todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      todayRow.classList.add('pulse');
+      todayRow.addEventListener('animationend', () => {
+        todayRow.classList.remove('pulse');
+      }, { once: true });
+    }, 400);
+  }
+
+  /* ─── FOOTER TIMESTAMP ──────────────────────────────────────── */
+
+  function setTimestamp() {
+    const now  = new Date();
+    const opts = {
+      weekday: 'long', year: 'numeric', month: 'long',
+      day: 'numeric', hour: '2-digit', minute: '2-digit',
+      timeZoneName: 'short'
+    };
+    document.getElementById('genTimestamp').textContent =
+      now.toLocaleString('en-IN', opts);
+  }
+
+  /* ─── INIT ──────────────────────────────────────────────────── */
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCalendar();
+    initTooltip();
+    scrollToToday();
+    setTimestamp();
+  });
+</script>
+</body>
+</html>
