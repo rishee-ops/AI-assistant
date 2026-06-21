@@ -127,6 +127,7 @@
     .th-payal    { background: #DB2777; color: white; }
     .th-prachi   { background: #16A34A; color: white; }
     .th-khusboo  { background: #D97706; color: white; }
+    .th-ananya   { background: #DC2626; color: white; }
 
     /* ─── ROWS ───────────────────────────────────────────────── */
     tbody tr {
@@ -420,6 +421,9 @@
     <div class="legend-item" style="color:#D97706" role="listitem">
       <span class="legend-dot" style="background:#D97706"></span>Khusboo Rizwan
     </div>
+    <div class="legend-item" style="color:#DC2626" role="listitem">
+      <span class="legend-dot" style="background:#DC2626"></span>Ananya Joshi
+    </div>
   </div>
 
   <!-- ─── TABLE ─── -->
@@ -436,6 +440,7 @@
           <th class="th-payal">Payal Sakaria</th>
           <th class="th-prachi">Prachi Pandey</th>
           <th class="th-khusboo">Khusboo Rizwan</th>
+          <th class="th-ananya">Ananya Joshi</th>
         </tr>
       </thead>
       <tbody id="calendarBody">
@@ -472,6 +477,7 @@
     { key: 'payal',   name: 'Payal Sakaria',   color: '#DB2777' },
     { key: 'prachi',  name: 'Prachi Pandey',   color: '#16A34A' },
     { key: 'khusboo', name: 'Khusboo Rizwan',  color: '#D97706' },
+    { key: 'ananya',  name: 'Ananya Joshi',    color: '#DC2626' },
   ];
 
   function getSchedule(dayType, personKey) {
@@ -487,6 +493,7 @@
           { time: '20:00', type: 'PreRecorded', course: 'US Corp Law courses' }
         ],
         khusboo: null,
+        ananya:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
       },
       tuesday: {
         rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
@@ -496,6 +503,7 @@
         payal:   [{ time: '20:00', type: 'Concept',           course: 'Generative AI for Career Growth (Senior Professionals)' }],
         prachi:  [{ time: '19:00', type: 'Outreach',          course: 'International Business Law' }],
         khusboo: null,
+        ananya:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
       },
       wednesday: {
         rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
@@ -505,6 +513,7 @@
         payal:   [{ time: '20:00', type: 'Scheduled',  course: 'AI for Business Growth / IIT Roorkee AI Cert.' }],
         prachi:  [{ time: '20:00', type: 'PreRecorded', course: 'US Corporate Compliance' }],
         khusboo: null,
+        ananya:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
       },
       thursday: {
         rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
@@ -514,6 +523,7 @@
         payal:   [{ time: '20:00', type: 'Mentoring', course: 'Startup Generalist & VA Training' }],
         prachi:  [{ time: '20:00', type: 'Outreach',  course: 'US Tax Compliance & Paralegal Work' }],
         khusboo: [{ time: '20:00', type: 'Concept',   course: 'Startup Generalist & VA Training' }],
+        ananya:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
       },
       friday: {
         rishee:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
@@ -523,6 +533,7 @@
         payal:   null,
         prachi:  null,
         khusboo: [{ type: 'Session', course: 'Service Business Entrepreneurship' }],
+        ananya:  [{ note: true, text: '📋 Check CSAT-ls for schedule' }],
       },
     };
     return S[dayType][personKey];
@@ -641,7 +652,7 @@
     WEEKS.forEach(week => {
       html += `
         <tr class="week-sep">
-          <td colspan="9">&#x1F4C5; ${week.label}</td>
+          <td colspan="10">&#x1F4C5; ${week.label}</td>
         </tr>`;
 
       week.dates.forEach(d => {
