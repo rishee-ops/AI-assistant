@@ -148,8 +148,59 @@ class LinkedInBrowser:
 
         return {"about": about}
 
-    async def send_connection_request(self, profile_url: str, note: str) -> bool:
-        """Navigate to profile and send a connection request with a note."""
+    async def scrape_own_profile(self, profile_name: str) -> dict:
+        """Search for and scrape the user's own LinkedIn profile by name."""
+        search_url = f"https://www.linkedin.com/search/results/people/?keywords={profile_name.replace(' ', '%20')}"
+        await self.page.goto(search_url, wait_until="domcontentloaded")
+        await _async_human_delay(2, 4)
+
+        # Click the first result (should be the user)
+        first = await self.page.query_selector(".entity-result__title-text a")
+        profile_url = ""
+        if first:
+            profile_url = await first.get_attribute("href")
+            profile_url = profile_url.split("?")[0]
+            await self.page.goto(profile_url, wait_until="domcontentloaded")
+            await _async_human_delay(2, 4)
+
+        data = {"url": profile_url}
+
+        try:
+            name_el = await self.page.query_selector("h1")
+            data["name"] = (await name_el.inner_text()).strip() if name_el else profile_name
+        except Exception:
+            data["name"] = profile_name
+
+        try:
+            headline_el = await self.page.query_selector(".text-body-medium.break-words")
+            data["headline"] = (await headline_el.inner_text()).strip() if headline_el else ""
+        except Exception:
+            data["headline"] = ""
+
+        try:
+            about_el = await self.page.query_selector("#about ~ div span[aria-hidden='true']")
+            if not about_el:
+                about_el = await self.page.query_selector("section.pv-about-section span")
+            data["about"] = (await about_el.inner_text()).strip() if about_el else ""
+        except Exception:
+            data["about"] = ""
+
+        # Scrape experience section for industry/company context
+        experiences = []
+        try:
+            exp_els = await self.page.query_selector_all("#experience ~ div .pvs-list__item--line-separated")
+            for el in exp_els[:3]:
+                text_el = await el.query_selector("span[aria-hidden='true']")
+                if text_el:
+                    experiences.append((await text_el.inner_text()).strip())
+        except Exception:
+            pass
+        data["experience"] = " | ".join(experiences)
+
+        return data
+
+    async def send_connection_request(self, profile_url: str) -> bool:
+        """Navigate to profile and send a plain connection request (no note — free account)."""
         await self.page.goto(profile_url, wait_until="domcontentloaded")
         await _async_human_delay(2, 4)
 
@@ -169,18 +220,10 @@ class LinkedInBrowser:
             await connect_btn.click()
             await _async_human_delay(1, 2)
 
-            # Click "Add a note"
-            add_note_btn = await self.page.query_selector('button[aria-label="Add a note"]')
-            if add_note_btn:
-                await add_note_btn.click()
-                await _async_human_delay(1, 2)
-                textarea = await self.page.query_selector("#custom-message")
-                if textarea:
-                    await _type_like_human(self.page, "#custom-message", note[:280])
-                    await _async_human_delay(1, 2)
-
-            # Send
-            send_btn = await self.page.query_selector('button[aria-label="Send now"]')
+            # Skip note — click "Send without a note" / "Send now" directly
+            send_btn = await self.page.query_selector('button[aria-label="Send without a note"]')
+            if not send_btn:
+                send_btn = await self.page.query_selector('button[aria-label="Send now"]')
             if not send_btn:
                 send_btn = await self.page.query_selector('button[aria-label="Send invitation"]')
             if send_btn:

@@ -14,7 +14,7 @@ MAX_PROFILES_PER_KEYWORD = 8
 MIN_ICP_SCORE = 60
 
 # Max connection requests per run (LinkedIn daily limit ~20-25 is safe)
-MAX_CONNECTIONS_PER_RUN = 15
+MAX_CONNECTIONS_PER_RUN = 20
 
 # Max post comments per run
 MAX_COMMENTS_PER_RUN = 10

@@ -1,6 +1,5 @@
 """
-Reads the uploaded PDF dossier and uses OpenAI to extract a structured
-ideal customer profile (ICP) — job titles, industries, keywords, pain points.
+Builds an ICP either from a PDF dossier or from the user's own LinkedIn profile data.
 """
 
 import json
@@ -55,7 +54,45 @@ DOSSIER:
     )
 
     raw = response.choices[0].message.content.strip()
-    # Strip markdown code fences if present
+    if raw.startswith("```"):
+        raw = raw.split("```")[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+    return json.loads(raw.strip())
+
+
+def build_icp_from_profile(profile: dict) -> dict:
+    """Build ICP by analysing the user's own LinkedIn profile scraped data."""
+    prompt = f"""
+You are a LinkedIn outreach strategist. Based on this person's LinkedIn profile,
+infer who they should be connecting with to grow their network and business.
+
+Return ONLY valid JSON with these exact keys:
+{{
+  "target_industries": ["industries most relevant to reach out to"],
+  "target_job_titles": ["job titles of people they should connect with"],
+  "target_keywords": ["3-5 LinkedIn search keywords to find those people"],
+  "pain_points": ["problems their background suggests they can help with"],
+  "value_proposition": "one sentence on what value this person offers",
+  "tone": "professional",
+  "company_name": "{profile.get('name', 'the user')}",
+  "product_summary": "brief summary of their professional background"
+}}
+
+PROFILE:
+Name: {profile.get('name', '')}
+Headline: {profile.get('headline', '')}
+About: {profile.get('about', '')[:1000]}
+Experience: {profile.get('experience', '')[:500]}
+"""
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
+    )
+
+    raw = response.choices[0].message.content.strip()
     if raw.startswith("```"):
         raw = raw.split("```")[1]
         if raw.startswith("json"):
