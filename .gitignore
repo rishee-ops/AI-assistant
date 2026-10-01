@@ -41,3 +41,6 @@ plans/
 __pycache__/
 
 internal/packaging/out/
+
+# frame previews from `openedit frames`
+qa/
