@@ -41,8 +41,8 @@ def paste(base,spr,cx,cy,scale=1.0,alpha=1.0,rot=0):
 def load(f,h):
     im=Image.open(f).convert('RGBA'); return im.resize((int(im.width*h/im.height),h),Image.LANCZOS)
 COURSE=load('course_cut.png',520); COURSE_S=load('course_cut.png',330)
-ST1=load('st1_cut.png',1000); ST2=load('st2_cut.png',1000)
-ST1s=load('st1_cut.png',640)
+ST1=load('bk1_cut.png',1000); ST2=load('bk2_cut.png',1000)
+ST1s=load('bk1_cut.png',640)
 def glow(im,col,r=30):
     a=im.getchannel('A'); g=Image.new('RGBA',im.size,col+(0,)); g.putalpha(a.point(lambda v:int(v*0.8)))
     pad=r*2; c=Image.new('RGBA',(im.width+pad*2,im.height+pad*2),(0,0,0,0)); c.alpha_composite(g,(pad,pad))
@@ -140,7 +140,7 @@ def lower_third(im,t):
         n=TS('RISHEE RHUDRA',64,shadow=False); r=TS('Deputy Director · Skill Arbitrage',36,fill=NAVY,shadow=False,bold=False)
         paste(layer,n,100+n.width/2-20+(1-ta)*-40,92,1,ta)
         paste(layer,r,100+r.width/2-20+(1-ta)*-40,190,1,ta)
-    im.alpha_composite(layer,(0,1160-int((1-vis)*30)))
+    im.alpha_composite(layer,(0,125-int((1-vis)*30)))
 
 def corner_fx(im,t):
     d=ImageDraw.Draw(im)
